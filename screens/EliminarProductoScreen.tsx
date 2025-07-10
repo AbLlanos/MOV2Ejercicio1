@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { ref, remove } from 'firebase/database'
 import { db } from '../firebase/Config'
 
-export default function EliminarProductoScreen() {
+export default function EliminarProductoScreen({ navigation }: any) {
   const [nombre, setnombre] = useState("")
 
 
@@ -17,6 +17,8 @@ export default function EliminarProductoScreen() {
     Alert.alert("Proceso terminado", "El producto ha sido eliminado")
 
     remove(ref(db, 'productos/' + nombre))
+
+    navigation.navigate("Inicio")
   };
 
 
@@ -37,70 +39,78 @@ export default function EliminarProductoScreen() {
 
 
   return (
-
     <View style={styles.container}>
-      <Text style={styles.titulo}>Eliminar producto</Text>
+      <Text style={styles.titulo}>Eliminar Producto</Text>
 
-      <Text style={styles.subTitulo}>Debe estar seguro anter de eliminar el producto</Text>
+      <Text style={styles.subTitulo}>
+        Por favor, asegúrese antes de eliminar el producto
+      </Text>
 
       <Text style={styles.label}>Ingrese el nombre del producto</Text>
       <TextInput
         style={styles.input}
-        placeholder='Ingrese el nombre del producto'
+        placeholder="Ingrese el nombre del producto"
         value={nombre}
         onChangeText={(texto) => setnombre(texto)}
-      ></TextInput>
-
+      />
 
       <TouchableOpacity style={styles.btn} onPress={() => confirmar()}>
-        <Text style={styles.txtBoton}>Crear Producto</Text>
-
+        <Text style={styles.txtBoton}>Eliminar Producto</Text>
       </TouchableOpacity>
-
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
+    padding: 30,
+    backgroundColor: '#e3d9d9',
     alignItems: 'center',
-    padding: 10,
+    justifyContent: "center"
   },
-  input: {
-    height: 40,
-    width: '90%',
-    borderRadius: 10,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
+  titulo: {
+    fontSize: 26,
+    fontWeight: '700',
+    marginBottom: 15,
+    color: '#d93025',
+  },
+  subTitulo: {
+    fontSize: 16,
+    color: '#555',
+    textAlign: 'center',
+    marginBottom: 30,
     paddingHorizontal: 10,
   },
   label: {
-    fontSize: 12,
-    marginVertical: 10,
+    alignSelf: 'flex-start',
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 6,
   },
-  titulo: {
-    fontSize: 20,
-    marginVertical: 10,
-  },
-  subTitulo: {
-    fontSize: 15,
-    marginVertical: 10,
-    textAlign: 'center',
+  input: {
+    width: '100%',
+    height: 45,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#bbb',
+    paddingHorizontal: 12,
+    fontSize: 16,
+    backgroundColor: '#fafafa',
+    marginBottom: 25,
   },
   btn: {
-    marginTop: 10,
-    backgroundColor: "#fb5b5b",
-    padding: 10,
+    backgroundColor: '#d93025',
+    width: '100%',
+    paddingVertical: 15,
     borderRadius: 10,
+    elevation: 4,
   },
   txtBoton: {
-    color: 'white',
-    fontSize: 15,
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '700',
     textAlign: 'center',
-  }
-
-
-})
+  },
+});

@@ -46,80 +46,80 @@ export default function LeerProductoScreen() {
 
   return (
     <View style={styles.container}>
-
-
       <Text style={styles.titulo}>Lista de productos</Text>
-
 
       <View style={styles.formato}>
         <FlatList
           data={datosProductos}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }: { item: Producto }) => (
-            <View style={{ padding: 10, borderBottomWidth: 1 }}>
-              <Text>Nombre: {item.nameProduct}</Text>
-              <Text>Precio: ${item.precioProduct}</Text>
-              <Text>Categoría: {item.categoriaProducto}</Text>
-              <Text>Stock: {item.stockProducto}</Text>
-              <Text>Descuento: ${item.descuentoProducto}</Text>
+            <View style={styles.itemContainer}>
+              <Text style={styles.itemNombre}>{item.nameProduct}</Text>
+              <Text style={styles.itemText}>
+                <Text style={styles.itemLabel}>Precio:</Text> ${item.precioProduct}
+              </Text>
+              <Text style={styles.itemText}>
+                <Text style={styles.itemLabel}>Categoría:</Text> {item.categoriaProducto}
+              </Text>
+              <Text style={styles.itemText}>
+                <Text style={styles.itemLabel}>Stock:</Text> {item.stockProducto}
+              </Text>
+              <Text style={styles.itemText}>
+                <Text style={styles.itemLabel}>Descuento:</Text> ${item.descuentoProducto}
+              </Text>
             </View>
           )}
+          showsVerticalScrollIndicator={false}
         />
       </View>
-
-    </View >
-
-
-  )
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     alignItems: 'center',
-    padding: 10,
-  },
-  input: {
-    height: 40,
-    width: '90%',
-    borderRadius: 10,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-  },
-  label: {
-    fontSize: 12,
-    marginVertical: 10,
+    paddingHorizontal: 15,
+    padding: 25,
+    backgroundColor: '#f5eddb',
+    marginBottom: 20,
   },
   titulo: {
-    fontSize: 20,
-    marginVertical: 10,
-  },
-  subTitulo: {
-    fontSize: 15,
-    marginVertical: 10,
+    fontSize: 24,
+    fontWeight: '700',
+    marginBottom: 15,
     textAlign: 'center',
   },
-  btn: {
-    marginTop: 10,
-    backgroundColor: "#efc762",
-    padding: 10,
+  formato: {
+    backgroundColor: '#ffd875',
+    width: '95%',
+    height:"90%",
+    borderRadius: 12,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+  },
+  itemContainer: {
+    backgroundColor: '#fff5cc',
     borderRadius: 10,
+    padding: 15,
+    marginBottom: 12,
+    elevation: 3,
+    shadowColor: '#a37f00',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
   },
-  txtBoton: {
-    color: 'white',
-    fontSize: 15,
-    textAlign: 'center',
+  itemNombre: {
+    fontSize: 20,
+    fontWeight: '700',
+    marginBottom: 8,
   },
-  formato:{
-    backgroundColor:"#ffd875",
-    margin:5,
-    width:"90%",
-    alignItems:"center",
-    borderRadius:10,
-    marginBottom:130,
-  }
-
-
-})
+  itemLabel: {
+    fontWeight: '700',
+  },
+  itemText: {
+    fontSize: 14,
+    marginBottom: 5,
+  },
+});

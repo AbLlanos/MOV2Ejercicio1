@@ -39,92 +39,120 @@ export default function ActualizarProductoScreen() {
     });
   }
 
-  return (
+ return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Actualizar producto</Text>
 
-        <View style={styles.container}>
-      <Text style={styles.titulo}>Actualzar producto</Text>
+      <Text style={styles.subTitulo}>
+        Complete la información solo si es necesario
+      </Text>
 
-      <Text style={styles.subTitulo}>Debe completar toda la información solicitada solo si es necesario</Text>
-
-      <Text style={styles.label}>Ingrese el nombre del producto</Text>
+      <Text style={styles.label}>Nombre del producto</Text>
       <TextInput
         style={styles.input}
-        placeholder='Ingrese el nombre del producto'
+        placeholder="Ingrese el nombre del producto"
         value={nombre}
         onChangeText={(texto) => setnombre(texto)}
-      ></TextInput>
+        placeholderTextColor="#999"
+      />
 
-      <Text style={styles.label}>Ingrese el precio del producto</Text>
+      <Text style={styles.label}>Precio del producto</Text>
       <TextInput
         style={styles.input}
-        keyboardType='numeric'
+        keyboardType="numeric"
         value={precio.toString()}
-        placeholder='Ingrese el precio del producto'
+        placeholder="Ingrese el precio del producto"
         onChangeText={(texto) => setprecio(+texto)}
-      ></TextInput>
+        placeholderTextColor="#999"
+      />
 
-      <Text style={styles.label}>Ingrese el stock del producto</Text>
+      <Text style={styles.label}>Stock del producto</Text>
       <TextInput
         style={styles.input}
-        placeholder='Ingrese el stock del producto'
-        keyboardType='numeric'
+        keyboardType="numeric"
         value={stock}
+        placeholder="Ingrese el stock del producto"
         onChangeText={(texto) => setstock(texto)}
-      ></TextInput>
+        placeholderTextColor="#999"
+      />
 
-
-      <Text style={styles.label}>La información cambiada ha sido verificada</Text>
-      <Switch value={terminos} onValueChange={() => setterminos(!terminos)}></Switch>
+      <View style={styles.switchContainer}>
+        <Text style={styles.label}>
+          La información cambiada ha sido verificada
+        </Text>
+        <Switch
+          trackColor={{ false: '#ccc', true: '#04f6c6' }}
+          thumbColor={terminos ? '#00bfa5' : '#f4f3f4'}
+          value={terminos}
+          onValueChange={() => setterminos(!terminos)}
+        />
+      </View>
 
       <TouchableOpacity style={styles.btn} onPress={() => editar()}>
         <Text style={styles.txtBoton}>Actualizar Producto</Text>
-
       </TouchableOpacity>
-
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
+    paddingHorizontal: 25,
+    backgroundColor: '#f9fcfc',
     alignItems: 'center',
-    padding: 10,
+    justifyContent: "center",
   },
-  input: {
-    height: 40,
-    width: '90%',
-    borderRadius: 10,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
+  titulo: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  subTitulo: {
+    fontSize: 16,
+    color: '#555',
+    marginBottom: 20,
+    textAlign: 'center',
     paddingHorizontal: 10,
   },
   label: {
-    fontSize: 12,
-    marginVertical: 10,
+    alignSelf: 'flex-start',
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 6,
   },
-  titulo: {
-    fontSize: 20,
-    marginVertical: 10,
+  input: {
+    width: '100%',
+    height: 48,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#a7d8d6',
+    paddingHorizontal: 15,
+    marginBottom: 18,
+    backgroundColor: '#e6f3f2',
+    fontSize: 16,
+    color: '#004d40',
   },
-  subTitulo: {
-    fontSize: 15,
-    marginVertical: 10,
-    textAlign: 'center',
+  switchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: 30,
+    paddingHorizontal: 5,
   },
   btn: {
-    marginTop: 10,
-    backgroundColor: "#04f6c6",
-    padding: 10,
-    borderRadius: 10,
+    backgroundColor: '#8cdecf',
+    width: '100%',
+    paddingVertical: 14,
+    borderRadius: 14,
+    shadowOpacity: 0.4,
+    shadowRadius: 15,
   },
   txtBoton: {
     color: 'white',
-    fontSize: 15,
+    fontSize: 18,
+    fontWeight: '700',
     textAlign: 'center',
-  }
-
-
-})
+  },
+});
